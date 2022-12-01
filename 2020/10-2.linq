@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var content = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\10-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "10-1.txt");
+	var content = File.ReadAllLines(inputFile);
 	var numbers = new List<int> {0}; //plane
 	numbers.AddRange(content.Select(x => int.Parse(x)).ToList());
 	numbers.Sort();

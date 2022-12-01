@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var content = File.ReadAllText(@"C:\Projects\adventofcode\aoc-2020\input\4-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "4-1.txt");
+	var content = File.ReadAllText(inputFile);
 	var passports = content.Split("\n\n");
 	var cleanPassports = passports.Select(x => x.Replace('\n', ' '));
 	var valid = 0;

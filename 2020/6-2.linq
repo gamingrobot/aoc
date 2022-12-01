@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var content = File.ReadAllText(@"C:\Projects\adventofcode\aoc-2020\input\6-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "6-1.txt");
+	var content = File.ReadAllText(inputFile);
 	var groups = content.Split("\n\n");
 	var total = 0;
 	foreach (var group in groups)

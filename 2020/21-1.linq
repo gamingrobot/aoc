@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var content = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\21-1-sample.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "21-1-sample.txt");
+	var content = File.ReadAllLines(inputFile);
 	var lineRegex = new Regex(@"^^([a-z ]*) \(contains ([a-z, ]*)\)$", RegexOptions.Singleline | RegexOptions.Compiled);
 	
 	var possibleAllergens = new Dictionary<string, List<string>>();

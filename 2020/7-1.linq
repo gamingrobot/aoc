@@ -7,7 +7,8 @@
 
 void Main()
 {
-	var content = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\7-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "7-1.txt");
+	var content = File.ReadAllLines(inputFile);
 	var lineRegex = new Regex(@"^([a-z ]*) bags contain (?:([0-9] [a-z ]*) bag[s]?[,.]?[ ]?)+$", RegexOptions.Singleline | RegexOptions.Compiled);
 	var bagRegex = new Regex(@"^([0-9]) ([a-z ]*)$", RegexOptions.Singleline | RegexOptions.Compiled);
 	var graph = new BidirectionalGraph<string, Edge<string>>();

@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var rows = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\3-1.txt").ToList();
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "3-1.txt");
+	var rows = File.ReadAllLines(inputFile).ToList();
 	var trees = 0;
 	var offset = 0;
 	var inputWidth = rows[0].Length;

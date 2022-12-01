@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var rows = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\3-1.txt").ToList();
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "3-1.txt");
+	var rows = File.ReadAllLines(inputFile).ToList();
 	CountPath(rows, 1, 1).Dump("Right 1, down 1");
 	CountPath(rows, 3, 1).Dump("Right 3, down 1");
 	CountPath(rows, 5, 1).Dump("Right 5, down 1");

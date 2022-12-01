@@ -6,7 +6,8 @@
 
 void Main()
 {
-	var content = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\11-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "11-1.txt");
+	var content = File.ReadAllLines(inputFile);
 	var mapping = new Dictionary<char, State>
 	{
 		{ 'L', State.Open },

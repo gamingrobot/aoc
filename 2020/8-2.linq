@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var instructionsRaw = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\8-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "8-1.txt");
+	var instructionsRaw = File.ReadAllLines(inputFile);
 	var instructions = new List<Instruction>();
 	foreach(var line in instructionsRaw)
 	{

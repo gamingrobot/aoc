@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var numbers = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\1-1.txt").Select(x => int.Parse(x)).ToList();
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "1-1.txt");
+	var numbers = File.ReadAllLines(inputFile).Select(x => int.Parse(x)).ToList();
 	//numbers.Dump();
 	var length = numbers.Count();
 	

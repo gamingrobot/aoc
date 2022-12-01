@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var passwordEntries = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\2-1.txt").ToList();
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "2-1.txt");
+	var passwordEntries = File.ReadAllLines(inputFile).ToList();
 	var valid = 0;
 	foreach(var entry in passwordEntries){
 		var bits = entry.Split(' ');

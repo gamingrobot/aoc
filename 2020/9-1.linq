@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var content = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\9-1.txt");
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "9-1.txt");
+	var content = File.ReadAllLines(inputFile);
 	var numbers = content.Select(x => long.Parse(x)).ToList();
 	var preable = 25;
 	for(var start = 0; (start + preable + 1) <= numbers.Count; start++)

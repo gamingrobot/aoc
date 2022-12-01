@@ -5,7 +5,8 @@
 
 void Main()
 {
-	var seats = File.ReadAllLines(@"C:\Projects\adventofcode\aoc-2020\input\5-1.txt").ToList();
+	var inputFile = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", "5-1.txt");
+	var seats = File.ReadAllLines(inputFile).ToList();
 	
 	var highest = 0;
 	foreach(var seatRaw in seats)
