@@ -1,4 +1,5 @@
 <Query Kind="Program">
+  <NuGetReference>morelinq</NuGetReference>
   <Namespace>System.Net</Namespace>
   <Namespace>System.Net.Http</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
