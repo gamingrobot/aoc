@@ -10,7 +10,7 @@ async Task Main()
     var content = await Helpers.LoadInput(4);
 
     Part1(content).Dump("Part1");
-    Part2(content).Dump("Part1");
+    Part2(content).Dump("Part2");
 }
 
 int Part1(List<string> content)
