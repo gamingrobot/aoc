@@ -9,7 +9,12 @@ public static class Helpers
 {
     public static async Task<List<string>> LoadInput(int year, int day)
     {
-        var inputFilePath = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", $"day{day:D2}.txt");
+        var inputDirectory = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input");
+        if(!Directory.Exists(inputDirectory))
+        {
+            Directory.CreateDirectory(inputDirectory);
+        }
+        var inputFilePath = Path.Combine(inputDirectory, $"day{day:D2}.txt");
         if (!File.Exists(inputFilePath))
         {
             var session = Util.GetPassword("aoc.session");
