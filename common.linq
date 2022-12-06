@@ -7,9 +7,8 @@
 
 public static class Helpers
 {
-    public static async Task<List<string>> LoadInput(int day)
+    public static async Task<List<string>> LoadInput(int year, int day)
     {
-        var year = 2022;
         var inputFilePath = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input", $"day{day:D2}.txt");
         if (!File.Exists(inputFilePath))
         {

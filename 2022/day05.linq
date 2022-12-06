@@ -3,11 +3,11 @@
   <Namespace>System.Threading.Tasks</Namespace>
 </Query>
 
-#load ".\common.linq"
+#load "..\common.linq"
 
 async Task Main()
 {
-    var content = await Helpers.LoadInput(5);
+    var content = await Helpers.LoadInput(2022, 5);
 
     Part1(content).Dump("Part1");
     Part2(content).Dump("Part2");
