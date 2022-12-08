@@ -36,25 +36,21 @@ public static class Helpers
 
 class AGrid<T> : Dictionary<APoint, T>
 {
-    public int MaxX()
+    public APoint GetMax()
     {
-        return Keys.Select(x => x.X).Max();
-    }
-    
-    public int MaxY()
-    {
-        return Keys.Select(x => x.Y).Max();
+        var x = Keys.Select(x => x.X).Max();
+        var y = Keys.Select(x => x.Y).Max();
+        return new APoint(x, y);
     }
 
     override public string ToString()
     {
-        var maxX = MaxX();
-        var maxY = MaxY();
+        var max = GetMax();
         var sb = new StringBuilder();
         var location = new APoint(0, 0);
-        for (location.Y = 0; maxY >= location.Y; location.Y++)
+        for (location.Y = 0; max.Y >= location.Y; location.Y++)
         {
-            for (location.X = 0; maxX >= location.X; location.X++)
+            for (location.X = 0; max.X >= location.X; location.X++)
             {
                 if (TryGetValue(location, out var value))
                 {
