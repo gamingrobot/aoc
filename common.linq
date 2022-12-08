@@ -10,7 +10,7 @@ public static class Helpers
     public static async Task<List<string>> LoadInput(int year, int day)
     {
         var inputDirectory = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input");
-        if(!Directory.Exists(inputDirectory))
+        if (!Directory.Exists(inputDirectory))
         {
             Directory.CreateDirectory(inputDirectory);
         }
@@ -32,4 +32,54 @@ public static class Helpers
         var lines = await File.ReadAllLinesAsync(inputFilePath);
         return lines.ToList();
     }
+}
+
+class AGrid<T> : Dictionary<APoint, T>
+{
+    public int MaxX()
+    {
+        return Keys.Select(x => x.X).Max();
+    }
+    
+    public int MaxY()
+    {
+        return Keys.Select(x => x.Y).Max();
+    }
+
+    override public string ToString()
+    {
+        var maxX = MaxX();
+        var maxY = MaxY();
+        var sb = new StringBuilder();
+        var location = new APoint(0, 0);
+        for (location.Y = 0; maxY >= location.Y; location.Y++)
+        {
+            for (location.X = 0; maxX >= location.X; location.X++)
+            {
+                if (TryGetValue(location, out var value))
+                {
+                    sb.Append(value);
+                }
+                else
+                {
+                    sb.Append(".");
+                }
+            }
+            sb.AppendLine();
+        }
+        return sb.ToString();
+    }
+    
+    object ToDump() { return ToString(); }
+}
+
+struct APoint
+{
+    public APoint(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+    public int X; //east/west
+    public int Y; //north/south
 }

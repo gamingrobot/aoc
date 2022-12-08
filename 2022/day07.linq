@@ -144,9 +144,3 @@ class ADirectory
     public Dictionary<string, ADirectory> SubDirs;
     public Dictionary<string, int> Files;
 }
-
-class AFile
-{
-    public string Name;
-    public int Size;
-}

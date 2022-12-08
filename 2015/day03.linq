@@ -16,8 +16,8 @@ async Task Main()
 
 int Part1(char[] input)
 {
-    var grid = new Dictionary<Point, int>();
-    var location = new Point(0, 0);
+    var grid = new AGrid<int>();
+    var location = new APoint(0, 0);
     grid[location] = 1;
     foreach(var c in input)
     {
@@ -53,15 +53,15 @@ int Part1(char[] input)
 
 int Part2(char[] input)
 {
-    var grid = new Dictionary<Point, int>();
-    var santaLocation = new Point(0, 0);
-    var roboLocation = new Point(0, 0);
+    var grid = new AGrid<int>();
+    var santaLocation = new APoint(0, 0);
+    var roboLocation = new APoint(0, 0);
     grid[santaLocation] = 1;
     grid[roboLocation] = 1;
     var isRobotTurn = false;
     foreach (var c in input)
     {
-        var actorLocation = new Point(0, 0);
+        var actorLocation = new APoint(0, 0);
         switch (c)
         {
             case '^':
@@ -107,15 +107,4 @@ int Part2(char[] input)
     }
     //grid.Dump();
     return grid.Values.Count();
-}
-
-struct Point
-{
-    public Point(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-    public int X; //east/west
-    public int Y; //north/south
 }
