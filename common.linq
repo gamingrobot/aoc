@@ -43,6 +43,12 @@ class AGrid<T> : Dictionary<APoint, T>
         return new APoint(x, y);
     }
 
+    // Requires the following CSS to be set in linqpad's Preferences->Results->Style sheet for text (HTML) results
+    //body
+    //{
+    //	margin: 0.3em 0.3em 0.4em 0.4em;
+    //	font-family: Consolas;
+    //}
     override public string ToString()
     {
         var max = GetMax();
