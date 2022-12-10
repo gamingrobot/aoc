@@ -20,6 +20,7 @@ async Task Main()
 //    var parsed = ConvertInput(test);
 
     Part1(parsed).Dump("Part1");
+    Part2(parsed).Dump("Part2");
 }
 
 int Part1(AGrid<Tree> grid)
@@ -43,8 +44,47 @@ int Part1(AGrid<Tree> grid)
             }
         }
     }
-    grid.Dump();
+    //grid.Dump();
     return grid.Values.Where(x => x.Visible).Count();
+}
+
+int Part2(AGrid<Tree> grid)
+{
+    var max = grid.GetMax();
+    var location = new APoint(0, 0);
+    for (location.Y = 0; max.Y >= location.Y; location.Y++)
+    {
+        for (location.X = 0; max.X >= location.X; location.X++)
+        {
+            var currentTree = grid[location];
+            var northScore = ScenicInDirection(grid, location, max, Direction.North);
+            var southScore = ScenicInDirection(grid, location, max, Direction.South);
+            var eastScore = ScenicInDirection(grid, location, max, Direction.East);
+            var westScore = ScenicInDirection(grid, location, max, Direction.West);
+            //$"{location.X},{location.Y}:{currentTree.Height} North: {north}, South: {south}, East: {east}, West: {west}".Dump();
+            currentTree.ScenicScore = northScore * southScore * eastScore * westScore;
+        }
+    }
+    //grid.Dump();
+    return grid.Values.Select(x => x.ScenicScore).Max();
+}
+
+int ScenicInDirection(AGrid<Tree> grid, APoint start, APoint max, Direction direction)
+{
+    var currentTree = grid[start];
+    var look = AdjustLocation(start, direction);
+    var score = 0;
+    while (CheckCondition(look, max, direction))
+    {
+        score++;
+        var lookingTree = grid[look];
+        if (lookingTree.Height >= currentTree.Height)
+        {
+            return score;
+        }
+        look = AdjustLocation(look, direction);
+    }
+    return score;
 }
 
 bool VisibleInDirection(AGrid<Tree> grid, APoint start, APoint max, Direction direction)
@@ -128,10 +168,12 @@ class Tree
     }
     public int Height;
     public bool Visible;
+    public int ScenicScore;
     public override string ToString()
     {
-        //return Height.ToString();
-        return Visible ? "Y" : "N";
+        return Height.ToString();
+        //return Visible ? "Y" : "N";
+        //return "[" + ScenicScore.ToString() + "]";
     }
 }
 
