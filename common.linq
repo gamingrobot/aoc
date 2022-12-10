@@ -43,6 +43,13 @@ class AGrid<T> : Dictionary<APoint, T>
         return new APoint(x, y);
     }
 
+    public APoint GetMin()
+    {
+        var x = Keys.Select(x => x.X).Min();
+        var y = Keys.Select(x => x.Y).Min();
+        return new APoint(x, y);
+    }
+
     // Requires the following CSS to be set in linqpad's Preferences->Results->Style sheet for text (HTML) results
     //body
     //{
@@ -52,15 +59,23 @@ class AGrid<T> : Dictionary<APoint, T>
     override public string ToString()
     {
         var max = GetMax();
+        var min = GetMin();
         var sb = new StringBuilder();
         var location = new APoint(0, 0);
-        for (location.Y = 0; max.Y >= location.Y; location.Y++)
+        for (location.Y = max.Y; location.Y >= min.Y; location.Y--)
         {
-            for (location.X = 0; max.X >= location.X; location.X++)
+            for (location.X = min.X; max.X >= location.X; location.X++)
             {
                 if (TryGetValue(location, out var value))
                 {
-                    sb.Append(value);
+                    if(typeof(T) == typeof(bool))
+                    {
+                        sb.Append((value is bool) ? "T" : "F");
+                    }
+                    else
+                    {
+                        sb.Append(value);
+                    }
                 }
                 else
                 {
@@ -84,4 +99,9 @@ struct APoint
     }
     public int X; //east/west
     public int Y; //north/south
+
+    object ToDump()
+    {
+        return $"({X},{Y})";
+    }
 }
