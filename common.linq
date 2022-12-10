@@ -32,6 +32,25 @@ public static class Helpers
         var lines = await File.ReadAllLinesAsync(inputFilePath);
         return lines.ToList();
     }
+    
+    public static List<string> LoadTestInput(int year, int day)
+    {
+        "USING TEST DATA".Dump();
+        var inputDirectory = Path.Combine(Path.GetDirectoryName(Util.CurrentQueryPath), "input");
+        if (!Directory.Exists(inputDirectory))
+        {
+            Directory.CreateDirectory(inputDirectory);
+        }
+        var fileFormat = $"day{day:D2}-test.txt";
+        var inputFilePath = Path.Combine(inputDirectory, fileFormat);
+        if (!File.Exists(inputFilePath))
+        {
+            throw new FileNotFoundException($"Could not find {fileFormat} for test data");
+
+        }
+        var lines = File.ReadAllLines(inputFilePath);
+        return lines.ToList();
+    }
 }
 
 class AGrid<T> : Dictionary<APoint, T>
