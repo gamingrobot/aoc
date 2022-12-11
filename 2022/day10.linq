@@ -13,6 +13,7 @@ async Task Main()
 
 
     Part1(parsed).Dump("Part1");
+    Part2(parsed);
 }
 
 int Part1(Queue<Instruction> input)
@@ -59,6 +60,56 @@ int Part1(Queue<Instruction> input)
         cycle++;
     }
     return signalTotal;
+}
+
+
+void Part2(Queue<Instruction> input)
+{
+    var registerX = 1;
+    var cycle = 1;
+    var pixels = new bool[240];
+    var inst = input.Dequeue();
+    var instWait = false;
+    while (true)
+    {
+        //inst.Dump(cycle.ToString());
+        switch (inst.OpCode)
+        {
+            case OpCode.NoOp:
+                break;
+            case OpCode.AddX:
+                if (instWait)
+                {
+                    registerX += inst.Argument.Value;
+                    instWait = false;
+                }
+                else
+                {
+                    instWait = true;
+                }
+                break;
+        }
+
+        var col = cycle % 40;
+        if (col == registerX - 1 || col == registerX || col == registerX + 1) //3 pixels wide
+        {
+            pixels[cycle] = true;
+        }
+
+        if (!instWait)
+        {
+            if (!input.TryDequeue(out inst))
+            {
+                break;
+            }
+        }
+        cycle++;
+    }
+    
+    foreach(var row in pixels.Select(x => x ? "#" : ".").Batch(40))
+    {
+        string.Join("", row).Dump();
+    }
 }
 
 Queue<Instruction> ConvertInput(List<string> content)
